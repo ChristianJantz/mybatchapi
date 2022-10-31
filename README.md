@@ -1,0 +1,2 @@
+# batchparty
+lern azure batch
