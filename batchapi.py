@@ -42,7 +42,7 @@ def creat_pool_if_not_exists(batch_service_client: BatchServiceClient, blob_serv
                     "mounts", "storage_mount_container_name"),
                 relative_mount_path="{}-{}".format(blob_service_client.account_name, params.get(
                     "mounts", "storage_mount_container_name")),
-                blobfuse_options=params.get("mounts", "blobfuseoption")
+                blobfuse_options=params.get("mounts", "blobfuseoptions")
             )
         ),
     ]
