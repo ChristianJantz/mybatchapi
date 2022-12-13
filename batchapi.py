@@ -47,10 +47,9 @@ def creat_pool_if_not_exists(batch_service_client: BatchServiceClient, blob_serv
         ),
         batchmodels.MountConfiguration(
             nfs_mount_configuration=batchmodels.NFSMountConfiguration(
-                source="{}.blob.core.windows.net:/{}/{}".format(
+                source="{0}.blob.core.windows.net:/{1}/{2}".format(
                     blob_service_client.account_name, blob_service_client.account_name, params.get("mounts", "storage_mount_container_name")),
-                relative_mount_path="{}-{}".format(blob_service_client.account_name, params.get(
-                    "mounts", "storage_mount_container_name")),
+                relative_mount_path="test",
                 mount_options=params.get("mounts", "nfs_mountoptions")
             )
         )
