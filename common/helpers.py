@@ -28,3 +28,22 @@ def generate_unique_resource_name(resource_prefix: str) -> str:
         str: a speciffied resource name
     """
     return resource_prefix + "-" + datetime.datetime.utcnow().strftime("%Y%m%d-%H%M%S%f")
+
+
+# def wrap_commands_in_shell(os_type: str, commands: list(str)) -> str:
+#     """_summary_
+
+#     Args:
+#         ostype (str): _description_
+#         commands (list): _description_
+
+#     Returns:
+#         str: _description_
+#     """
+#     if os_type.lower() == "linux":
+#         return (f'/bin/bash -c '
+#                 f'\'set -e; set -o pipfail; {";".join(commands)}; wait\'')
+#     elif os_type.lower() == "windows":
+#         return f'cmd.exe /c "{"&".join(commands)}"'
+#     else:
+#         raise ValueError(f'unkown os type: {os_type}')

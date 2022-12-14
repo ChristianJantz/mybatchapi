@@ -49,7 +49,8 @@ def creat_pool_if_not_exists(batch_service_client: BatchServiceClient, blob_serv
             nfs_mount_configuration=batchmodels.NFSMountConfiguration(
                 source="{0}.blob.core.windows.net:/{1}/{2}".format(
                     blob_service_client.account_name, blob_service_client.account_name, params.get("mounts", "storage_mount_container_name")),
-                relative_mount_path="test",
+                relative_mount_path="{}-{}".format(blob_service_client.account_name, params.get(
+                    "mounts", "storage_mount_container_name")),
                 mount_options=params.get("mounts", "nfs_mountoptions")
             )
         )
@@ -63,7 +64,10 @@ def creat_pool_if_not_exists(batch_service_client: BatchServiceClient, blob_serv
             target_dedicated_nodes=params.get("vmpool", "pool_node_count"),
             enable_inter_node_communication=True,
             start_task=batchmodels.StartTask(
-                command_line="/bin/bash -c 'wget  -O - https://raw.githubusercontent.com/Azure/batch-insights/master/scripts/run-linux.sh | bash",
+                command_line="/bin/bash -c wget -o https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb \
+                                dpkg -i packages-microsoft-prod.deb \
+                                apt-get update \
+                                wget -o https://raw.githubusercontent.com/Azure/batch-insights/master/scripts/run-linux.sh | bash",
                 environment_settings=envs,
                 user_identity=batchmodels.UserIdentity(
                     auto_user=batchmodels.AutoUserSpecification(
